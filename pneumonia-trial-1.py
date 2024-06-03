@@ -104,7 +104,7 @@ def main(file_path, model_name, chunk_size, chunk_overlap, output_csv_file, prog
 
 if __name__ == "__main__":
     main(
-        file_path='/Users/anishnarain/Documents/FYP-Files/git/identifying-ARDS/data-preprocessing/csv-files/ards-cohort-notes.csv',
+        file_path='ards-cohort-notes.csv',
         model_name="llama3",
         chunk_size=4096,
         chunk_overlap=100,
