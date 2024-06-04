@@ -40,4 +40,39 @@ Patient Number: 7, HADM ID: 20067108, Discharge Text Length: 3581, Pneumonia Det
 ...
 ```
 
-4. I tried setting up a job, `job-1.sh`, and running `job-trial-1.py` (identical to `pneumonia-trial-2.py`).
+> RAN JOB BUT NOW STUCK. It keeps running out of cpu by the third patient. The first two are still very slow :(
+4. I tried setting up a job, `job-1.sh`, and running `job-trial-1.py` (identical to `pneumonia-trial-2.py`). This code ran for two patients and then ran out of cpu. I initially set the number of cpus to 16 and later 72 (which I think defaulted down to 64). Both of these ran out of cpu.
+
+Commands for running jobs:
+```
+sed -i 's/\r$//' job-1.sh
+qsub job-1.sh
+qstat
+```
+
+Commands for viewing the job files:
+```
+cat pneumonia_detection_job_trial_1.e9521955
+tail -f pneumonia_detection_job_trial_1.e9521955
+```
+
+Here are the results when I actually ran the jobs:
+```
+JOB TRIAL 1 (select=1:ncpus=16:mem=8gb)
+Patient Number: 0, HADM ID: 20015730, Discharge Text Length: 24729, Pneumonia Detected: Yes, Time Taken: 212
+Patient Number: 1, HADM ID: 20022465, Discharge Text Length: 9219, Pneumonia Detected: No, Time Taken: 80
+
+but then: 2024/06/04 12:04:11 llama.go:577: loaded 0 images
+=>> PBS: job killed: ncpus 58.88 exceeded limit 16 (sum)
+
+(FROM: cat pneumonia_detection_job_trial_1.e9521955)
+```
+
+```
+JOB TRIAL 2 (select=1:ncpus=72:mem=8gb)
+Patient Number: 0, HADM ID: 20015730, Discharge Text Length: 24729, Pneumonia Detected: Yes, Time Taken: 255
+Patient Number: 1, HADM ID: 20022465, Discharge Text Length: 9219, Pneumonia Detected: Yes, Time Taken: 97
+
+but then: 2024/06/04 12:35:55 llama.go:577: loaded 0 images
+=>> PBS: job killed: ncpus 115.98 exceeded limit 64 (sum)
+```
