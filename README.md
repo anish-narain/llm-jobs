@@ -76,3 +76,9 @@ Patient Number: 1, HADM ID: 20022465, Discharge Text Length: 9219, Pneumonia Det
 but then: 2024/06/04 12:35:55 llama.go:577: loaded 0 images
 =>> PBS: job killed: ncpus 115.98 exceeded limit 64 (sum)
 ```
+I tried increasing mem to 128gb but still ran out of cpus.
+
+> Then tried running it on GPU but it still only used the cpus and ran out of cpus
+5. Then tried using `job-2.sh` and `job-trial-2.py` which is meant to use the GPU. But it was still using only the cpus and gave the same "ncpus exceeded limit error" after the first two patients.
+
+6. Also tried running on Colab. My code requires: langchain and ollama (which can be installed using just Colab). However I also need access to a terminal and a large memory which only comes from Colab Pro. I can do go down that route but not sure if it will be faster than my own device and I still don't know if it will definitely work. 
